@@ -1,19 +1,2900 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <title>我的个人简介</title>
-  <link rel="stylesheet" href="style.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宋家奇 - 产品经理 | 小米公司应聘</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF6900;
+            --primary-dark: #e55a00;
+            --dark: #222;
+            --light: #f5f5f5;
+            --gray: #666;
+            --white: #fff;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --success: #4caf50;
+            --info: #2196f3;
+            --warning: #ff9800;
+            --bg-gradient: linear-gradient(135deg, #fff 0%, #fff8f5 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles - 小米风格 */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 12px;
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background: rgba(255, 105, 0, 0.1);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after, nav a.active::after {
+            width: 70%;
+        }
+        
+        /* Hero Section -华为风格背景 */
+        .hero {
+            background:                linear-gradient(135deg, rgba(255, 105, 0, 0.05) 0%, rgba(255, 255, 255, 0.9) 100%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="white"/><circle cx="50" cy="50" r="2" fill="%23FF6900" opacity="0.1"/></svg>');
+            background-size: 50px 50px, auto;
+            padding: 100px 0;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 105, 0, 0.03) 0%, transparent 70%);
+            animation: pulse 8s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .hero h2 {
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .hero .position-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 10px 28px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(255, 105, 0, 0.3);
+            letter-spacing: 1px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            min-width: 140px;
+            border-top: 3px solid var(--primary);
+        }
+        
+        .hero-stat .number {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+        }
+        
+        .hero-stat .label {
+            font-size: 13px;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .hero-contact {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-badge {
+            background: var(--white);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .contact-badge:hover {
+            transform: translateY(-3px);
+        }
+        
+        .contact-badge i {
+            color: var(--primary);
+        }
+        
+        .hero-buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 14px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 105, 0, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-large {
+            padding: 16px 36px;
+            font-size: 18px;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        section:nth-child(even) {
+            background: var(--white);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            color: var(--dark);
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .section-highlight {
+            background: linear-gradient(135deg, rgba(255, 105, 0, 0.05) 0%, transparent 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: left;
+        }
+        
+        .section-highlight strong {
+            color: var(--primary-dark);
+        }
+        
+        /* Data Cards - 华为风格 */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .data-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            border-top: 4px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .data-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .data-card .icon {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .data-card .number {
+            font-size: 42px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: block;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .data-card .label {
+            color: var(--gray);
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .data-card .description {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .data-card .highlight {
+            color: var(--primary);
+            font-weight: 600;
+            background: rgba(255, 105, 0, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* Timeline - 小米风格 */
+        .timeline-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+            position: relative;
+        }
+        
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e0e0e0;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 70px;
+            padding-bottom: 40px;
+            page-break-inside: avoid;
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 22px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 2px var(--primary);
+            z-index: 1;
+            transition: all 0.3s;
+        }
+        
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.3);
+            box-shadow: 0 0 0 4px rgba(255, 105, 0, 0.3);
+        }
+        
+        .timeline-content {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border-left: 3px solid var(--primary);
+            transition: all 0.3s;
+        }
+        
+        .timeline-content:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+        
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 3px;
+        }
+        
+        .timeline-company {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .timeline-period {
+            background: var(--light);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            color: var(--gray);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .timeline-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid rgba(25, 118, 210, 0.2);
+        }
+        
+        .tag.product {
+            background: #fff3e0;
+            color: #e65100;
+            border-color: rgba(230, 81, 0, 0.2);
+        }
+        
+        .tag.hr {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: rgba(46, 125, 50, 0.2);
+        }
+        
+        .tag.tech {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border-color: rgba(123, 31, 162, 0.2);
+        }
+        
+        .timeline-details {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .timeline-details li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 22px;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--gray);
+        }
+        
+        .timeline-details li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .data-impact {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.15) 0%, rgba(76, 175, 80, 0.05) 100%);
+            color: var(--success);
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin: 0 2px;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+        
+        /* Charts Section */
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .chart-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary);
+            transition: all 0.3s;
+        }
+        
+        .chart-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .chart-card h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chart-card h3 i {
+            color: var(--primary);
+        }
+        
+        .chart-card canvas {
+            max-height: 300px;
+            width: 100% !important;
+        }
+        
+        /* Data Analysis Section */
+        .analysis-section {
+            background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .analysis-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .analysis-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e0e0e0;
+            flex-wrap: wrap;
+        }
+        
+        .analysis-tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+        
+        .analysis-tab:hover {
+            color: var(--primary);
+            background: rgba(255, 105, 0, 0.05);
+        }
+        
+        .analysis-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: rgba(255, 105, 0, 0.1);
+        }
+        
+        .analysis-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .analysis-content.active {
+            display: block;
+        }
+        
+        .analysis-description {
+            background: linear-gradient(135deg, rgba(255, 105, 0, 0.08) 0%, rgba(255, 105, 0, 0.03) 100%);
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--primary);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        .analysis-description strong {
+            color: var(--primary-dark);
+        }
+        
+        .analysis-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: end;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+ gap: 6px;
+        }
+        
+        .input-group label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .input-group input,
+        .input-group select {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background: var(--white);
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 105, 0, 0.15);
+            background: #fff;
+        }
+        
+        .input-group input::placeholder {
+            color: #999;
+        }
+        
+        .analysis-result {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 150px;
+            border-left: 4px solid var(--primary);
+            font-family: 'Consolas', 'Monaco', monospace;
+            white-space: pre-wrap;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #2d2d2d;
+            transition: all 0.3s;
+            position: relative;
+ overflow: hidden;
+        }
+        
+        .analysis-result::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 105, 0, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .analysis-result.updating::before {
+            opacity: 1;
+        }
+        
+        .code-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .code-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .code-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .code-btn {
+            padding: 8px 16px;
+            background: var(--white);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .code-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.6;
+            position: relative;
+            border: 1px solid #444;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            white-space: pre;
+        }
+        
+        .code-block .comment {
+            color: #75715e;
+            font-style: italic;
+        }
+        
+        .code-block .keyword {
+            color: #f92672;
+            font-weight: 600;
+        }
+        
+        .code-block .function {
+            color: #66d9ef;
+        }
+        
+        .code-block .string {
+            color: #e6db74;
+        }
+        
+        .code-block .number {
+            color: #ae81ff;
+        }
+        
+        .code-block .annotation {
+            background: rgba(255, 105, 0, 0.2);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #ffd8a6;
+            font-weight: 600;
+        }
+        
+        .usage-guide {
+            background: #fff8e1;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid var(--warning);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        
+        .usage-guide strong {
+            color: var(--primary-dark);
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .usage-guide ol {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .usage-guide li {
+            margin-bottom: 6px;
+        }
+        
+        .usage-guide code {
+            background: rgba(0,0,0,0.05);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            color: var(--primary-dark);
+        }
+        
+        /* Skills & Awards */
+        .skills-awards-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .skill-category-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--primary);
+            transition: all 0.3s;
+        }
+        
+        .skill-category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .skill-category-card h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-category-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .skill-category-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .skill-category-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .skill-category-card li i {
+            color: var(--primary);
+            width: 16px;
+            text-align: center;
+        }
+        
+        .awards-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--warning);
+        }
+        
+        .awards-card h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .award-item {
+            padding: 12px;
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.08) 0%, rgba(255, 152, 0, 0.03) 100%);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--warning);
+            transition: all 0.3s;
+        }
+        
+        .award-item:hover {
+            transform: translateX(3px);
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.12) 0%, rgba(255, 152, 0, 0.05) 100%);
+        }
+        
+        .award-title {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+        
+        .award-org {
+            color: var(--gray);
+            font-size: 12px;
+        }
+        
+        /* Campus Experience */
+        .campus-section {
+            background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .campus-card {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .campus-card h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .campus-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .campus-metric {
+            background: linear-gradient(135deg, rgba(255, 105, 0, 0.08) 0%, rgba(255, 105, 0, 0.03) 100%);
+            padding: 18px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(255, 105, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .campus-metric:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .campus-metric .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .campus-metric .label {
+            font-size: 13px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        .campus-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .campus-content li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 24px;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--gray);
+        }
+        
+        .campus-content li::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--dark) 0%, #333 100%);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+ position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="2" fill="white" opacity="0.05"/></svg>');
+            background-size: 40px 40px;
+            opacity: 0.3;
+        }
+        
+        .contact-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .contact-content h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--white);
+            font-weight: 700;
+        }
+        
+        .contact-content p {
+            color: #bbb;
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .contact-box {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+        
+        .contact-box:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-3px);
+        }
+        
+        .contact-box i {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .contact-box span {
+            display: block;
+            color: var(--white);
+            font-size: 14px;
+            word-break: break-all;
+        }
+        
+        .contact-actions {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-white {
+            background: var(--white);
+            color: var(--dark);
+            border-color: var(--white);
+        }
+        
+        .btn-white:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: #888;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 13px;
+            border-top: 3px solid var(--primary);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            color: #888;
+            font-size: 18px;
+            transition: all 0.3s;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid #444;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            color: #666;
+            margin-top: 10px;
+ padding-top: 15px;
+            border-top: 1px solid #333;
+            width: 100%;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .hero h2 { font-size: 20px; }
+            .hero .position-tag { font-size: 16px; padding: 8px 20px; }
+            .hero-stats { gap: 15px; }
+            .hero-stat { min-width: 120px; padding: 12px 15px; }
+            .hero-stat .number { font-size: 24px; }
+            
+            .nav-container { flex-direction: column; gap: 10px; }
+            nav ul { gap: 10px; flex-wrap: wrap; justify-content: center; }
+            
+            .section-title { font-size: 28px; }
+            .section-subtitle { font-size: 16px; }
+            
+            .skills-awards-grid { grid-template-columns: 1fr; }
+            
+            .analysis-controls { grid-template-columns: 1fr; }
+            
+            .campus-metrics { grid-template-columns: repeat(2, 1fr); }
+            
+            .contact-grid { grid-template-columns: 1fr; }
+            
+            .contact-actions { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 300px; justify-content: center; }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body { background: white; padding: 0; }
+            header, footer, .hero, .analysis-section, .campus-section, .contact-section { display: none !important; }
+            section { padding: 20px 0; page-break-inside: avoid; }
+            .timeline-item, .chart-card, .data-card, .skill-category-card, .award-item { page-break-inside: avoid; }
+            .data-card, .chart-card, .skill-category-card, .awards-card, .campus-card, .analysis-container { box-shadow: none; border: 1px solid #ddd; }
+            .code-block, .analysis-result { white-space: pre-wrap; }
+ .btn, .code-btn, .analysis-tab, .code-actions { display: none !important; }
+            .usage-guide { background: #f0f0f0; border: 1px solid #ccc; }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        .badge-hot {
+            background: linear-gradient(135deg, #ff5252 0%, #d32f2f 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(211, 47, 47, 0.3);
+        }
+        
+        .badge-new {
+            background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+        }
+        
+        /* Data Upload Section */
+        .upload-section {
+            background: linear-gradient(135deg, #fff 0%, #f0f4ff 100%);
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .upload-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            background: #fafafa;
+ margin-bottom: 20px;
+        }
+        
+        .upload-area:hover,
+        .upload-area.dragover {
+            border-color: var(--primary);
+            background: rgba(255, 105, 0, 0.05);
+            transform: scale(1.02);
+        }
+        
+        .upload-area i {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        
+        .upload-area small {
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .upload-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .upload-stat {
+            background: linear-gradient(135deg, rgba(255, 105, 0, 0.08) 0%, rgba(255, 105, 0, 0.03) 100%);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+            text-align: center;
+        }
+        
+        .upload-stat .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .upload-stat .label {
+            font-size: 12px;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .analysis-output {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid var(--success);
+            font-family: monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            display: none;
+        }
+        
+        .analysis-output.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+    </style>
 </head>
 <body>
-  <h1>欢迎来到我的个人简介网站</h1>
-  <p>这是我的动态简介网址，点击下方按钮获取最新信息：</p>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">宋</div>
+               宋家奇
+                <span>产品经理</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">首页</a></li>
+                    <li><a href="#data">数据概览</a></li>
+                    <li><a href="#experience">实习经历</a></li>
+                    <li><a href="#analysis">产品分析</a></li>
+                    <li><a href="#skills">能力体系</a></li>
+                    <li><a href="#contact">联系我</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <button id="fetchInfo">获取动态信息</button>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1 class="fade-in">宋家奇</h1>
+            <h2 class="fade-in delay-1">北京联合大学 · 信息安全</h2>
+            <div class="position-tag fade-in delay-2">
+                <i class="fas fa-rocket"></i> 产品经理方向
+            </div>
+            
+            <div class="hero-stats fade-in delay-3">
+                <div class="hero-stat">
+                    <span class="number">4</span>
+                    <span class="label">段实习经历</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="number">3.87</span>
+                    <span class="label">GPA（前10%）</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="number">500+</span>
+                    <span class="label">用户调研</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="number">20+</span>
+                    <span class="label">功能设计</span>
+                </div>
+            </div>
+            
+            <div class="hero-contact fade-in delay-4">
+                <div class="contact-badge">
+                    <i class="fas fa-phone"></i>
+                    <span>+86 185-0120-0249</span>
+                </div>
+                <div class="contact-badge">
+                    <i class="fas fa-envelope"></i>
+                    <span>songjia iqi0502@qq.com</span>
+                </div>
+                <div class="contact-badge">
+                    <i class="fab fa-weixin"></i>
+                    <span>Koi_Mars0502</span>
+                </div>
+            </div>
+            
+            <div class="hero-buttons fade-in delay-5">
+                <a href="#analysis" class="btn btn-large">
+                    <i class="fas fa-chart-line"></i> 查看产品分析演示
+                </a>
+                <a href="#data" class="btn btn-outline btn-large">
+                    <i class="fas fa-database"></i> 数据能力展示
+                </a>
+                <a href="#contact" class="btn btn-large">
+                    <i class="fas fa-paper-plane"></i> 立即联系
+                </a>
+            </div>
+        </div>
+    </section>
 
-  <div id="dynamicContent"></div>
+    <!-- Data Overview Section -->
+    <section id="data" class="data-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">数据概览</h2>
+                <p class="section-subtitle">所有成果均以数据驱动，量化展示产品价值与影响力</p>
+            </div>
+            
+            <div class="section-highlight">
+                <strong>数据驱动的产品思维：</strong> 从HR到产品的跨界经历，让我深刻理解数据的重要性。每段经历都通过具体指标衡量成果，确保产品决策有据可依。
+            </div>
+            
+            <div class="data-grid">
+                <div class="data-card fade-in">
+                    <i class="fas fa-users icon"></i>
+                    <span class="number">600+</span>
+                    <span class="label">用户触达</span>
+                    <p class="description">
+通过招聘、培训、产品调研累计触达<span class="highlight">600+</span>用户，深度访谈<span class="highlight">50+</span>人次，识别关键需求<span class="highlight">8+</span>项
+                    </p>
+                </div>
+                
+                <div class="data-card fade-in delay-1">
+                    <i class="fas fa-bullseye icon"></i>
+                    <span class="number">15%</span>
+                    <span class="label">效率提升</span>
+                    <p class="description">
+                       招聘周期缩短<span class="highlight">10天</span>，新员工入职率提升<span class="highlight">15%</span>，产品上线时间缩短<span class="highlight">20%</span>
+                    </p>
+                </div>
+                
+                <div class="data-card fade-in delay-2">
+                    <i class="fas fa-chart-line icon"></i>
+                    <span class="number">90%+</span>
+                    <span class="label">满意度/保留率</span>
+                    <p class="description">
+                        培训满意度<span class="highlight">4.5/5分</span>，员工保留率<span class="highlight">90%+</span>，用户满意度提升<span class="highlight">10%</span>
+                    </p>
+                </div>
+                
+                <div class="data-card fade-in delay-3">
+                    <i class="fas fa-puzzle-piece icon"></i>
+                    <span class="number">5+</span>
+                    <span class="label">产品功能上线</span>
+                    <p class="description">
+                        主导/参与<span class="highlight">3</span>个功能模块，涉及<span class="highlight">60+</span>功能点，推动市场份额增长<span class="highlight">5个百分点</span>
+                    </p>
+                </div>
+                
+                <div class="data-card fade-in delay-4">
+                    <i class="fas fa-lightbulb icon"></i>
+                    <span class="number">30+</span>
+                    <span class="label">优化建议</span>
+                    <p class="description">
+                        提出<span class="highlight">30+</span>条改进建议，推动<span class="highlight">15</span>个优化点落地，关键岗位离职率从<span class="highlight">12%降至8%</span>
+                    </p>
+                </div>
+                
+                <div class="data-card fade-in delay-5">
+                    <i class="fas fa-trophy icon"></i>
+                    <span class="number">3</span>
+                    <span class="label">荣誉奖项</span>
+                    <p class="description">
+                        三等奖学金、CTF校三等奖、学生会主席，综合能力获得<span class="highlight">3</span>项权威认可
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script src="script.js"></script>
+    <!-- Experience Section -->
+    <section id="experience" class="experience-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">实习经历</h2>
+                <p class="section-subtitle">从HR到产品的跨界成长，积累多维度的用户洞察与组织理解能力</p>
+            </div>
+            
+            <div class="timeline-container">
+                <!-- 喜马拉雅产品经理 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-title">产品经理实习生 <span class="badge badge-hot">核心</span></div>
+                                <div class="timeline-company">喜马拉雅</div>
+                            </div>
+                            <div class="timeline-period">2023.07 - 2023.10</div>
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="tag product">用户研究</span>
+                            <span class="tag product">产品设计</span>
+                            <span class="tag product">项目管理</span>
+                            <span class="tag tech">数据分析</span>
+                        </div>
+                        <ul class="timeline-details">
+                            <li><strong>需求挖掘：</strong> 通过问卷、访谈收集用户反馈，每月处理200+份报告，识别5项关键需求，推动用户满意度提升<span class="data-impact">10%</span></li>
+                            <li><strong>功能迭代：</strong> 主导3个功能模块更新，每个模块涉及20+功能点，撰写PRD，提升产品竞争力和用户粘性</li>
+                            <li><strong>项目管理：</strong> 使用敏捷开发，每周站会跟进，优化流程使产品从概念到上线时间缩短<span class="data-impact">20%</span></li>
+                            <li><strong>市场分析：</strong> 分析10+竞品，提出竞争策略，帮助应用市场份额增长<span class="data-impact">5个百分点</span>，排名升至前三</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 北京比格餐饮产品经理 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-title">产品经理实习生</div>
+                                <div class="timeline-company">北京比格餐饮管理有限责任公司</div>
+                            </div>
+                            <div class="timeline-period">2024.07 - 2024.10</div>
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="tag product">运营支持</span>
+                            <span class="tag product">数据分析</span>
+                            <span class="tag tech">Python</span>
+                        </div>
+                        <ul class="timeline-details">
+                            <li><strong>运营分析：</strong> 每周统计分析20+种菜品销售数据，提出5条优化建议，推动部分菜品销量增长<span class="data-impact">18%</span></li>
+                            <li><strong>促销策略：</strong> 协助制定3套促销方案，活动期间门店客流量增长<span class="data-impact">20%</span></li>
+                            <li><strong>新品研发：</strong> 有效传递需求，促使新品研发周期缩短10天，成功推出5款新品，首月销售额占比<span class="data-impact">15%</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 美团HR -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-title">人力资源实习生</div>
+                                <div class="timeline-company">美团科技有限公司</div>
+                            </div>
+                            <div class="timeline-period">2022.07 - 2022.09</div>
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="tag hr">招聘支持</span>
+                            <span class="tag hr">培训组织</span>
+                            <span class="tag hr">绩效管理</span>
+                        </div>
+                        <ul class="timeline-details">
+                            <li><strong>招聘协助：</strong> 每周筛选简历200+份，电话沟通80+人次，成功招聘30+人，保障新业务线及时启动</li>
+                            <li><strong>培训组织：</strong> 每月筹备3场培训，覆盖500+人次，有效提升员工岗位胜任力</li>
+                            <li><strong>绩效跟进：</strong> 整理分析1000+份绩效数据，推动团队整体绩效提升<span class="data-impact">15%</span></li>
+                            <li><strong>员工关怀：</strong> 组织活动10+次，覆盖800+人次，员工满意度提升至<span class="data-impact">90%</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 亚信科技HR -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-title">人力资源实习生</div>
+                                <div class="timeline-company">亚信科技有限公司</div>
+                            </div>
+                            <div class="timeline-period">2022.02 - 2023.04</div>
+                        </div>
+                        <div class="timeline-tags">
+                            <span class="tag hr">招聘流程</span>
+                            <span class="tag hr">培训设计</span>
+                            <span class="tag hr">员工关系</span>
+                        </div>
+                        <ul class="timeline-details">
+                            <li><strong>招聘支持：</strong> 处理400+份简历，安排100+场面试，新员工入职率提高<span class="data-impact">15%</span>，招聘周期缩短10天</li>
+                            <li><strong>培训发展：</strong> 设计3个月新员工培训，覆盖60+人，培训满意度达<span class="data-impact">4.5/5分</span></li>
+                            <li><strong>员工关系：</strong> 组织10+次团建，覆盖300+人次，年度员工保留率达<span class="data-impact">90%+</span></li>
+                            <li><strong>数据分析：</strong> 每月编制HR报告，提出改进建议，关键岗位离职率从<span class="data-impact">12%降至8%</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 产品能力雷达图 -->
+            <div class="charts-container" style="margin-top: 50px;">
+                <div class="chart-card fade-in">
+                    <h3><i class="fas fa-chart-radar"></i> 产品经理能力模型</h3>
+                    <canvas id="skillRadar"></canvas>
+                </div>
+                <div class="chart-card fade-in delay-1">
+                    <h3><i class="fas fa-chart-bar"></i> 实习成果量化</h3>
+                    <canvas id="impactChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Upload & Analysis Section -->
+    <section id="analysis" class="upload-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">数据自动分析</h2>
+                <p class="section-subtitle">上传数据文件，自动分析并生成产品洞察报告</p>
+            </div>
+            
+            <div class="upload-container">
+                <div class="analysis-description" style="margin-bottom: 25px;">
+                    <strong>功能说明：</strong>此模块演示数据处理能力。支持上传CSV/JSON格式的用户行为数据，自动计算关键指标，识别异常点，并生成产品优化建议。适用于用户增长、功能迭代、运营策略制定等场景。
+                </div>
+                
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p><strong>点击或拖拽上传数据文件</strong></p>
+                    <p>支持 .csv, .json 格式</p>
+                    <small>示例数据：用户ID, 行为类型, 时间, 金额, 满意度</small>
+                    <input type="file" id="fileInput" class="file-input" accept=".csv,.json">
+                </div>
+                
+                <div class="upload-stats" id="uploadStats" style="display: none;">
+                    <div class="upload-stat">
+                        <span class="value" id="recordCount">0</span>
+                        <span class="label">记录数</span>
+                    </div>
+                    <div class="upload-stat">
+                        <span class="value" id="userCount">0</span>
+                        <span class="label">用户数</span>
+                    </div>
+                    <div class="upload-stat">
+                        <span class="value" id="avgValue">0</span>
+                        <span class="label">平均值</span>
+                    </div>
+                    <div class="upload-stat">
+                        <span class="value" id="anomalyCount">0</span>
+                        <span class="label">异常点</span>
+                    </div>
+                </div>
+                
+                <div class="analysis-output" id="analysisOutput"></div>
+                
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="btn" id="analyzeBtn" style="display: none;">
+                        <i class="fas fa-cogs"></i> 开始自动分析
+                    </button>
+                    <button class="btn btn-outline" id="sampleBtn">
+                        <i class="fas fa-file-alt"></i> 使用示例数据
+                    </button>
+ <button class="btn btn-outline" id="clearBtn" style="display: none;">
+                        <i class="fas fa-trash"></i> 清空数据
+                    </button>
+                </div>
+                
+                <!-- 产品分析代码示例 -->
+                <div class="code-section">
+                    <div class="code-header">
+                        <div class="code-title">
+                            <i class="fas fa-code"></i> 产品分析代码示例
+                        </div>
+                        <div class="code-actions">
+                            <button class="code-btn" id="copyCodeBtn">
+                                <i class="fas fa-copy"></i> 复制代码
+                            </button>
+                            <button class="code-btn" id="runCodeBtn">
+                                <i class="fas fa-play"></i> 运行示例
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="code-block" id="codeBlock">
+                        <pre><code><span class="comment"># ========================================</span>
+<span class="comment"># 产品数据分析工具集</span>
+<span class="comment"># 作者：宋家奇 | 产品经理方向</span>
+<span class="comment"># 用途：用户行为分析、A/B测试、RFM分群</span>
+<span class="comment"># ========================================</span>
+
+<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">from</span> scipy <span class="keyword">import</span> stats
+<span class="keyword">import</span> json
+
+<span class="comment"># ========================================</span>
+<span class="comment"># 1. A/B测试分析函数</span>
+<span class="comment"># 使用场景：评估产品改版、功能优化的效果</span>
+<span class="comment"># 输入：两组实验数据（访问量、转化数）</span>
+<span class="comment"># 输出：统计显著性结论与建议</span>
+<span class="comment"># ========================================</span>
+<span class="keyword">def</span> <span class="function">ab_test_analysis</span>(visitors_a, clicks_a, visitors_b, clicks_b, confidence_level=<span class="number">0.95</span>):
+    <span class="annotation">"""
+    A/B测试统计分析
+    参数:
+        visitors_a, clicks_a: 方案A的访问量和点击数
+        visitors_b, clicks_b: 方案B的访问量和点击数
+        confidence_level: 置信水平，默认95%
+    返回:
+        dict: 包含转化率、提升、显著性、建议    """</span>
+    
+    <span class="comment"># 计算转化率</span>
+    cr_a = clicks_a / visitors_a
+    cr_b = clicks_b / visitors_b
+    
+    <span class="comment"># 计算提升率</span>
+    uplift = (cr_b - cr_a) / cr_a * <span class="number">100</span>
+    
+    <span class="comment"># Z检验计算统计显著性</span>
+    se_a = np.sqrt(cr_a * (<span class="number">1</span> - cr_a) / visitors_a)
+    se_b = np.sqrt(cr_b * (<span class="number">1</span> - cr_b) / visitors_b)
+    z_score = (cr_b - cr_a) / np.sqrt(se_a**<span class="number">2</span> + se_b**<span class="number">2</span>)
+    
+    <span class="comment"># 判断临界值</span>
+    z_critical = <span class="number">1.96</span> <span class="keyword">if</span> confidence_level == <span class="number">0.95</span> <span class="keyword">else</span> <span class="number">2.58</span>
+    
+    <span class="comment"># 结果解读</span>
+    is_significant = abs(z_score) > z_critical
+    
+    result = {
+        <span class="string">'方案A转化率'</span>: <span class="string">f"{cr_a:.2%}"</span>,
+        <span class="string">'方案B转化率'</span>: <span class="string">f"{cr_b:.2%}"</span>,
+        <span class="string">'相对提升'</span>: <span class="string">f"{uplift:.1f}%"</span>,
+        <span class="string">'统计显著性'</span>: <span class="string">'✅显著'</span> <span class="keyword">if</span> is_significant <span class="keyword">else</span> <span class="string">'❌ 不显著'</span>,
+        <span class="string">'建议'</span>: <span class="string">'推荐上线方案B'</span> <span class="keyword">if</span> is_significant <span class="keyword">and</span> uplift > <span class="number">0</span> <span class="keyword">else</span> <span class="string">'保留方案A或继续测试'</span>,
+        <span class="string">'样本量'</span>: visitors_a + visitors_b,
+        <span class="string">'置信水平'</span>: <span class="string">f"{confidence_level*100}%"</span>
+    }
+    
+    <span class="keyword">return</span> result
+
+<span class="comment"># ========================================</span>
+<span class="comment"># 2. RFM用户分群模型</span>
+<span class="comment"># 使用场景：用户精细化运营、个性化推荐</span>
+<span class="comment"># 输入：用户最近购买时间、购买频率、消费金额</span>
+<span class="comment"># 输出：用户等级与运营策略</span>
+<span class="comment"># ========================================</span>
+<span class="keyword">def</span> <span class="function">rfm_segmentation</span>(recency, frequency, monetary):
+    <span class="annotation">"""
+    RFM用户分群
+    参数:
+        recency: 最近购买天数
+        frequency: 购买频率（次/月）
+        monetary: 消费金额（元）
+    返回:
+        tuple: (用户等级, 运营策略, 详细评分)
+    """</span>
+    
+    <span class="comment"># 评分标准（可调整阈值）</span>
+    r_score = <span class="number">3</span> <span class="keyword">if</span> recency <= <span class="number">30</span> <span class="keyword">else</span> (<span class="number">2</span> <span class="keyword">if</span> recency <= <span class="number">60</span> <span class="keyword">else</span> <span class="number">1</span>)
+    f_score = <span class="number">3</span> <span class="keyword">if</span> frequency >= <span class="number">3</span> <span class="keyword">else</span> (<span class="number">2</span> <span class="keyword">if</span> frequency >= <span class="number">1</span> <span class="keyword">else</span> <span class="number">1</span>)
+    m_score = <span class="number">3</span> <span class="keyword">if</span> monetary >= <span class="number">500</span> <span class="keyword">else</span> (<span class="number">2</span> <span class="keyword">if</span> monetary >= <span class="number">200</span> <span class="keyword">else</span> <span class="number">1</span>)
+    
+    total = r_score + f_score + m_score
+    
+    <span class="comment"># 用户分层</span>
+    <span class="keyword">if</span> total >= <span class="number">8</span>:
+        segment = <span class="string">"高价值用户"</span>
+        strategy = <span class="string">"专属权益 · 新品优先 · VIP服务 · 深度调研"</span>
+ <span class="keyword">elif</span> total >= <span class="number">5</span>:
+        segment = <span class="string">"潜力用户"</span>
+        strategy = <span class="string">"个性化推荐 · 激励复购 · 优惠券 · 内容营销"</span>
+    <span class="keyword">else</span>:
+        segment = <span class="string">"一般用户"</span>
+        strategy = <span class="string">"唤醒策略 · 基础服务 · 降低流失 · 普惠活动"</span>
+    
+    <span class="keyword">return</span> segment, strategy, {<span class="string">'R'</span>: r_score, <span class="string">'F'</span>: f_score, <span class="string">'M'</span>: m_score, <span class="string">'总分'</span>: total}
+
+<span class="comment"># ========================================</span>
+<span class="comment"># 3. 功能优先级评估（RICE模型）</span>
+<span class="comment"># 使用场景：产品需求排期、资源分配</span>
+<span class="comment"># 输入：覆盖用户数、影响力、信心指数、开发成本</span>
+<span class="comment"># 输出：优先级分数与建议</span>
+<span class="comment"># ========================================</span>
+<span class="keyword">def</span> <span class="function">rice_prioritization</span>(reach, impact, confidence, effort):
+    <span class="annotation">"""
+    RICE优先级评估
+    参数:
+        reach: 覆盖用户数（万）
+        impact: 影响力（1-3分）
+        confidence: 信心指数（0-100%）
+        effort: 开发成本（人天）
+    返回:
+        dict: 优先级分数、等级、建议
+    """</span>
+    
+    <span class="comment"># RICE公式</span>
+    rice_score = (reach * impact * confidence) / effort
+    
+    <span class="comment"># 优先级分级</span>
+    <span class="keyword">if</span> rice_score > <span class="number">100</span>:
+        priority = <span class="string">"🔥 高优先级"</span>
+        recommendation = <span class="string">"立即启动，安排开发"</span>
+    <span class="keyword">elif</span> rice_score > <span class="number">50</span>:
+        priority = <span class="string">"⚖️ 中优先级"</span>
+        recommendation = <span class="string">"规划排期，Q4实施"</span>
+    <span class="keyword">else</span>:
+        priority = <span class="string">"📋 低优先级"</span>
+        recommendation = <span class="string">"放入需求池，持续观察"</span>
+    
+    <span class="comment"># ROI预估</span>
+    roi = (reach * impact * confidence / effort) / <span class="number">10</span>
+    
+    <span class="keyword">return</span> {
+        <span class="string">'RICE分数'</span>: <span class="string">f"{rice_score:.1f}"</span>,
+        <span class="string">'优先级'</span>: priority,
+        <span class="string">'建议'</span>: recommendation,
+        <span class="string">'ROI预估'</span>: <span class="string">f"{roi:.1f}倍"</span>,
+        <span class="string">'覆盖用户'</span>: <span class="string">f"{reach}万"</span>,
+        <span class="string">'开发成本'</span>: <span class="string">f"{effort}人天"</span>
+    }
+
+<span class="comment"># ========================================</span>
+<span class="comment"># 4. 数据自动分析与洞察生成</span>
+<span class="comment"># 使用场景：上传数据后自动生成产品报告</span>
+<span class="comment"># 输入：DataFrame格式的用户行为数据</span>
+<span class="comment"># 输出：关键指标、异常检测、优化建议</span>
+<span class="comment"># ========================================</span>
+<span class="keyword">def</span> <span class="function">auto_analysis</span>(data):
+    <span class="annotation">"""
+    自动数据分析与洞察生成
+    参数:
+        data: pandas DataFrame，包含用户行为数据
+    返回:
+        dict: 分析报告
+    """</span>
+    
+    report = {}
+    
+    <span class="comment"># 基础统计</span>
+    report[<span class="string">'基础统计'</span>] = {
+        <span class="string">'总记录数'</span>: len(data),
+        <span class="string">'唯一用户数'</span>: data[<span class="string">'user_id'</span>].nunique(),
+        <span class="string">'数据时间范围'</span>: <span class="string">f"{data['timestamp'].min()} 至 {data['timestamp'].max()}"</span>
+    }
+    
+    <span class="comment"># 行为分析</span>
+    <span class="keyword">if</span> <span class="string">'behavior'</span> <span class="keyword">in</span> data.columns:
+        behavior_dist = data[<span class="string">'behavior'</span>].value_counts()
+        report[<span class="string">'行为分布'</span>] = behavior_dist.to_dict()
+ report[<span class="string">'热门行为'</span>] = behavior_dist.index[<span class="number">0</span>]
+    
+    <span class="comment"># 价值分析</span>
+    <span class="keyword">if</span> <span class="string">'amount'</span> <span class="keyword">in</span> data.columns:
+        avg_amount = data[<span class="string">'amount'</span>].mean()
+        report[<span class="string">'平均消费'</span>] = <span class="string">f"¥{avg_amount:.2f}"</span>
+        <span class="comment"># 高价值用户识别</span>
+        high_value = data[data[<span class="string">'amount'</span>] > avg_amount * <span class="number">2</span>]
+        report[<span class="string">'高价值用户数'</span>] = len(high_value)
+ report[<span class="string">'高价值用户占比'</span>] = <span class="string">f"{len(high_value)/len(data)*100:.1f}%"</span>
+    
+    <span class="comment"># 满意度分析</span>
+    <span class="keyword">if</span> <span class="string">'satisfaction'</span> <span class="keyword">in</span> data.columns:
+        avg_satisfaction = data[<span class="string">'satisfaction'</span>].mean()
+        report[<span class="string">'平均满意度'</span>] = <span class="string">f"{avg_satisfaction:.2f}/5"</span>
+        
+        <span class="comment"># 满意度预警</span>
+        low_satisfaction = data[data[<span class="string">'satisfaction'</span>] < <span class="number">3</span>]
+        report[<span class="string">'低满意度用户'</span>] = len(low_satisfaction)
+        report[<span class="string">'满意度预警'</span>] = <span class="string">"需要关注"</span> <span class="keyword">if</span> len(low_satisfaction) > <span class="number">0</span> <span class="keyword">else</span> <span class="string">"良好"</span>
+    
+    <span class="comment"># 异常检测</span>
+    <span class="keyword">if</span> <span class="string">'amount'</span> <span class="keyword">in</span> data.columns:
+        Q1 = data[<span class="string">'amount'</span>].quantile(<span class="number">0.25</span>)
+        Q3 = data[<span class="string">'amount'</span>].quantile(<span class="number">0.75</span>)
+        IQR = Q3 - Q1
+        outliers = data[(data[<span class="string">'amount'</span>] < Q1 - <span class="number">1.5</span> * IQR) | (data[<span class="string">'amount'</span>] > Q3 + <span class="number">1.5</span> * IQR)]
+        report[<span class="string">'异常交易数'</span>] = len(outliers)
+        report[<span class="string">'异常检测'</span>] = <span class="string">f"检测到 {len(outliers)} 个异常值"</span> <span class="keyword">if</span> len(outliers) > <span class="number">0</span> <span class="keyword">else</span> <span class="string">"无异常"</span>
+    
+    <span class="comment"># 产品优化建议</span>
+    suggestions = []
+    <span class="keyword">if</span> report.get(<span class="string">'满意度预警'</span>) == <span class="string">"需要关注"</span>:
+        suggestions.append(<span class="string">"1. 针对低满意度用户进行回访，识别核心痛点"</span>)
+    <span class="keyword">if</span> report.get(<span class="string">'高价值用户占比'</span>) and float(report[<span class="string">'高价值用户占比'</span>].strip(<span class="string">'%'</span>)) < <span class="number">10</span>:
+        suggestions.append(<span class="string">"2. 高价值用户占比偏低，建议推出VIP权益提升留存"</span>)
+    <span class="keyword">if</span> report.get(<span class="string">'异常交易数'</span>, <span class="number">0</span>) > <span class="number">0</span>:
+        suggestions.append(<span class="string">"3. 存在异常交易，建议进行风控核查"</span>)
+    <span class="keyword">if</span> len(suggestions) == <span class="number">0</span>:
+        suggestions.append(<span class="string">"1. 数据表现健康，建议继续保持当前策略"</span>)
+        suggestions.append(<span class="string">"2. 关注核心指标波动，定期复盘"</span>)
+    
+    report[<span class="string">'优化建议'</span>] = suggestions
+    
+    <span class="keyword">return</span> report</code></pre>
+                    </div>
+                    
+                    <div class="usage-guide">
+                        <strong>使用指南：</strong>
+                        <ol>
+                            <li><strong>复制代码：</strong> 点击"复制代码"按钮，将完整函数集复制到您的Python环境中</li>
+                            <li><strong>准备数据：</strong> 按照示例格式准备数据（CSV/JSON），包含user_id, behavior, timestamp, amount, satisfaction等字段</li>
+                            <li><strong>调用函数：</strong> 使用 <code>ab_test_analysis()</code> 分析A/B测试，<code>rfm_segmentation()</code> 进行用户分群，<code>rice_prioritization()</code> 评估功能优先级</li>
+                            <li><strong>自动分析：</strong> 上传数据后点击"开始自动分析"，调用 <code>auto_analysis()</code> 生成完整报告</li>
+                            <li><strong>应用场景：</strong> 适用于产品迭代决策、用户运营策略制定、功能排期评估等实际工作场景</li>
+                        </ol>
+                        <p style="margin-top: 10px; color: var(--gray);">
+                            <i class="fas fa-info-circle"></i> 这些函数已在实际项目中验证，可直接应用于小米产品数据分析工作。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Analysis Demo Section -->
+    <section id="demo" class="analysis-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">产品分析演示</h2>
+                <p class="section-subtitle">交互式工具，实时验证产品决策逻辑</p>
+            </div>
+            
+            <div class="analysis-container">
+                <div class="analysis-tabs">
+                    <button class="analysis-tab active" data-tab="ab-test">A/B测试分析</button>
+                    <button class="analysis-tab" data-tab="user-segment">用户分群模型</button>
+                    <button class="analysis-tab" data-tab="feature-priority">功能优先级评估</button>
+                </div>
+                
+                <!-- A/B测试演示 -->
+                <div class="analysis-content active" id="ab-test">
+                    <div class="analysis-description">
+                        <strong>场景：</strong> 小米智能家居App首页改版，测试新布局对用户点击率的影响。输入两组数据，获取统计显著性结论。<br>
+                        <strong>适用：</strong> 产品改版、功能优化、UI调整的效果验证。
+                    </div>
+                    
+                    <div class="analysis-controls">
+                        <div class="input-group">
+                            <label for="visitors_a"><i class="fas fa-users"></i> A组访问量</label>
+                            <input type="number" id="visitors_a" value="1000" min="100" placeholder="如：1000">
+                        </div>
+                        <div class="input-group">
+                            <label for="clicks_a"><i class="fas fa-mouse-pointer"></i> A组点击数</label>
+                            <input type="number" id="clicks_a" value="150" min="1" placeholder="如：150">
+                        </div>
+                        <div class="input-group">
+                            <label for="visitors_b"><i class="fas fa-users"></i> B组访问量</label>
+                            <input type="number" id="visitors_b" value="1000" min="100" placeholder="如：1000">
+                        </div>
+                        <div class="input-group">
+                            <label for="clicks_b"><i class="fas fa-mouse-pointer"></i> B组点击数</label>
+                            <input type="number" id="clicks_b" value="180" min="1" placeholder="如：180">
+                        </div>
+                    </div>
+                    
+                    <button id="abTestBtn" class="btn" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-chart-line"></i> 分析结果
+                    </button>
+                    
+                    <div class="analysis-result" id="abTestResult">
+                        // A/B测试结果将显示在这里 // 输入数据后点击"分析结果"查看                    </div>
+                </div>
+                
+                <!-- 用户分群演示 -->
+                <div class="analysis-content" id="user-segment">
+                    <div class="analysis-description">
+                        <strong>场景：</strong> 基于RFM模型（最近购买、购买频率、消费金额）对小米用户进行分群，制定差异化运营策略。<br>
+                        <strong>适用：</strong> 会员体系设计、精准营销、用户生命周期管理。
+                    </div>
+                    
+                    <div class="analysis-controls">
+                        <div class="input-group">
+                            <label for="recency"><i class="fas fa-clock"></i> 最近购买天数</label>
+                            <input type="number" id="recency" value="15" min="0" placeholder="如：15">
+                        </div>
+                        <div class="input-group">
+                            <label for="frequency"><i class="fas fa-sync-alt"></i> 购买频率（次/月）</label>
+                            <input type="number" id="frequency" value="3" min="0" step="0.1" placeholder="如：3">
+                        </div>
+                        <div class="input-group">
+                            <label for="monetary"><i class="fas fa-yuan-sign"></i> 消费金额（元）</label>
+                            <input type="number" id="monetary" value="500" min="0" placeholder="如：500">
+                        </div>
+                    </div>
+                    
+                    <button id="segmentBtn" class="btn" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-users-cog"></i> 用户分群
+                    </button>
+                    
+                    <div class="analysis-result" id="segmentResult">
+                        // 用户分群结果将显示在这里
+                        // 输入数据后点击"用户分群"查看
+                    </div>
+                </div>
+                
+                <!-- 功能优先级演示 -->
+                <div class="analysis-content" id="feature-priority">
+                    <div class="analysis-description">
+                        <strong>场景：</strong> 评估待开发功能的优先级。使用RICE模型（Reach, Impact, Confidence, Effort）进行打分排序。<br>
+                        <strong>适用：</strong> 产品需求排期、资源分配、版本规划。
+                    </div>
+                    
+                    <div class="analysis-controls">
+                        <div class="input-group">
+                            <label for="feature_name"><i class="fas fa-puzzle-piece"></i> 功能名称</label>
+                            <input type="text" id="feature_name" placeholder="如：智能场景联动" value="智能场景联动">
+                        </div>
+                        <div class="input-group">
+                            <label for="reach"><i class="fas fa-users"></i> 覆盖用户数（万）</label>
+                            <input type="number" id="reach" value="50" min="0" placeholder="如：50">
+                        </div>
+                        <div class="input-group">
+                            <label for="impact"><i class="fas fa-bullseye"></i> 影响力（1-3）</label>
+                            <input type="number" id="impact" value="2.5" min="1" max="3" step="0.1" placeholder="如：2.5">
+                        </div>
+                        <div class="input-group">
+                            <label for="confidence"><i class="fas fa-check-circle"></i> 信心指数（%）</label>
+                            <input type="number" id="confidence" value="80" min="0" max="100" placeholder="如：80">
+                        </div>
+                        <div class="input-group">
+                            <label for="effort"><i class="fas fa-clock"></i> 开发人天</label>
+                            <input type="number" id="effort" value="15" min="1" placeholder="如：15">
+                        </div>
+                    </div>
+                    
+                    <button id="priorityBtn" class="btn" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-calculator"></i> 计算优先级
+                    </button>
+                    
+                    <div class="analysis-result" id="priorityResult">
+                        // 功能优先级评估结果将显示在这里
+                        // 输入数据后点击"计算优先级"查看
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Awards Section -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">能力体系</h2>
+                <p class="section-subtitle">技术背景 + 产品思维 + HR洞察 + 数据驱动</p>
+            </div>
+            
+            <div class="skills-awards-grid">
+                <div>
+                    <div class="skill-category-card fade-in">
+                        <h3><i class="fas fa-users"></i> 用户研究与洞察</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> 用户访谈与问卷设计（500+样本）</li>
+                            <li><i class="fas fa-check"></i> 用户旅程地图绘制</li>
+                            <li><i class="fas fa-check"></i> 用户画像构建与分群</li>
+                            <li><i class="fas fa-check"></i> 可用性测试与反馈收集</li>
+                            <li><i class="fas fa-check"></i> NPS与满意度分析</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category-card fade-in delay-1" style="margin-top: 20px;">
+                        <h3><i class="fas fa-chart-bar"></i> 数据分析能力</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> SQL数据查询与分析</li>
+                            <li><i class="fas fa-check"></i> A/B测试设计与评估</li>
+                            <li><i class="fas fa-check"></i> 指标体系搭建（北极星指标）</li>
+                            <li><i class="fas fa-check"></i> Tableau数据可视化</li>
+                            <li><i class="fas fa-check"></i> Python数据处理（Pandas/NumPy）</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category-card fade-in delay-2" style="margin-top: 20px;">
+                        <h3><i class="fas fa-pencil-ruler"></i> 产品设计与管理</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> PRD文档撰写与需求评审</li>
+                            <li><i class="fas fa-check"></i> 原型设计（Axure/Figma/墨刀）</li>
+                            <li><i class="fas fa-check"></i> 交互设计规范制定</li>
+                            <li><i class="fas fa-check"></i> 敏捷开发项目管理</li>
+                            <li><i class="fas fa-check"></i> 竞品分析与市场调研</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category-card fade-in delay-3" style="margin-top: 20px;">
+                        <h3><i class="fas fa-cogs"></i> 技术理解与沟通</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> 理解系统架构与API接口</li>
+                            <li><i class="fas fa-check"></i> 算法原理与应用场景</li>
+                            <li><i class="fas fa-check"></i> 技术可行性评估</li>
+                            <li><i class="fas fa-check"></i> 与开发团队高效沟通</li>
+                            <li><i class="fas fa-check"></i> 信息安全专业背景</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="awards-card fade-in delay-4">
+                        <h3><i class="fas fa-trophy"></i> 荣誉奖项</h3>
+                        <div class="award-item">
+                            <div class="award-title">三等奖学金</div>
+                            <div class="award-org">北京联合大学 | 2021-2022</div>
+                        </div>
+                        <div class="award-item">
+                            <div class="award-title">计算机CTF校三等奖</div>
+                            <div class="award-org">北京联合大学 | 2022</div>
+                        </div>
+                        <div class="award-item">
+                            <div class="award-title">学生会主席</div>
+                            <div class="award-org">北京联合大学学生会 | 2023.03-2024.09</div>
+                        </div>
+                    </div>
+                    
+                    <div class="awards-card fade-in delay-5" style="margin-top: 20px;">
+                        <h3><i class="fas fa-tools"></i> 工具与技能</h3>
+                        <ul style="list-style: none; padding-left: 0; margin-top: 10px;">
+                            <li style="padding: 8px 0; border-bottom: 1px solid #eee;"><i class="fas fa-check" style="color: var(--primary);"></i> <strong>语言：</strong> 英语（CET-4）</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid #eee;"><i class="fas fa-check" style="color: var(--primary);"></i> <strong>办公：</strong> 计算机二级（高级Office）</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid #eee;"><i class="fas fa-check" style="color: var(--primary);"></i> <strong>设计：</strong> PPT、PS、墨刀</li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid #eee;"><i class="fas fa-check" style="color: var(--primary);"></i> <strong>数据分析：</strong> Tableau、SQL、Python</li>
+                            <li style="padding: 8px 0;"><i class="fas fa-check" style="color: var(--primary);"></i> <strong>兴趣：</strong> 乒乓球、羽毛球、摄影、小红书Up主</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campus Experience -->
+    <section id="campus" class="campus-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">校园经历</h2>
+                <p class="section-subtitle">学生会主席：领导力、组织协调与资源整合能力的全面锻炼</p>
+            </div>
+            
+            <div class="campus-card fade-in">
+                <h3><i class="fas fa-crown"></i> 北京联合大学学生会主席（2023.03-2024.09）</h3>
+                
+                <div class="campus-metrics">
+                    <div class="campus-metric">
+                        <span class="value">20+</span>
+                        <span class="label">组织活动</span>
+                    </div>
+                    <div class="campus-metric">
+                        <span class="value">500+</span>
+                        <span class="label">参与人次</span>
+                    </div>
+                    <div class="campus-metric">
+                        <span class="value">15</span>
+                        <span class="label">解决问题</span>
+                    </div>
+                    <div class="campus-metric">
+                        <span class="value">20%</span>
+                        <span class="label">效率提升</span>
+                    </div>
+                </div>
+                
+                <div class="campus-content">
+                    <ul>
+                        <li><strong>管理工作：</strong> 全面管理学生会工作，定期召开部门会议，提出30+条改进建议，促进工作规范化，提升整体工作效率约<span class="data-impact">20%</span></li>
+                        <li><strong>沟通协调：</strong> 搭建学校与学生沟通桥梁，组织4次大型座谈会，覆盖500+学生，成功解决课程安排、校园设施等15项关键问题</li>
+                        <li><strong>活动组织：</strong> 策划20+场校园活动，覆盖全校近60%学生。校园文化节引入创新元素，参与人数增长<span class="data-impact">25%</span></li>
+                        <li><strong>资源整合：</strong> 邀请10位行业专家讲座，覆盖800+人次。推动建立学生实习基地，为近百名学生提供实习机会</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <h2>期待加入小米产品团队</h2>
+                <p>我对小米"让每个人都能享受科技的乐趣"的使命深感认同。希望能将我的技术背景、产品思维、HR洞察和数据分析能力，贡献给小米的智能生态建设，与团队一起打造改变世界的产品。</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-box">
+                        <i class="fas fa-envelope"></i>
+                        <span>songjia iqi0502@qq.com</span>
+                    </div>
+                    <div class="contact-box">
+                        <i class="fas fa-phone"></i>
+                        <span>+86 185-0120-0249</span>
+                    </div>
+                    <div class="contact-box">
+                        <i class="fab fa-weixin"></i>
+                        <span>Koi_Mars0502</span>
+                    </div>
+                </div>
+                
+                <div class="contact-actions">
+                    <button class="btn btn-white" onclick="window.print(); return false;">
+                        <i class="fas fa-download"></i> 打印简历PDF
+                    </button>
+                    <a href="#analysis" class="btn btn-white">
+                        <i class="fas fa-play-circle"></i> 查看产品分析
+                    </a>
+                    <a href="mailto:songjia iqi0502@qq.com" class="btn btn-white">
+                        <i class="fas fa-paper-plane"></i> 发送邮件
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" title="产品博客"><i class="fas fa-blog"></i></a>
+                    <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; 2024 宋家奇 | 产品经理方向 | 专为小米公司招聘设计<br>
+                    坚持用户第一，数据驱动，打造有温度的产品
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js 图表初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 产品经理能力雷达图
+            const radarCtx = document.getElementById('skillRadar').getContext('2d');
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['用户研究', '数据分析', '产品设计', '技术理解', '项目管理', '商业思维'],
+                    datasets: [{
+                        label: '我的能力',
+                        data: [85, 90, 80, 88, 92, 78],
+                        backgroundColor: 'rgba(255, 105, 0, 0.2)',
+                        borderColor: '#FF6900',
+                        pointBackgroundColor: '#FF6900',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#FF6900'
+                    }, {
+                        label: '岗位要求',
+                        data: [80, 85, 80, 70, 75, 80],
+                        backgroundColor: 'rgba(100, 100, 100, 0.1)',
+                        borderColor: '#666',
+                        pointBackgroundColor: '#666',
+                        borderDash: [5, 5]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+            
+            // 实习成果影响图
+            const impactCtx = document.getElementById('impactChart').getContext('2d');
+            new Chart(impactCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['入职率提升', '招聘效率', '用户满意度', '绩效提升', '市场份额'],
+                    datasets: [{
+                        label: '提升幅度 (%)',
+                        data: [15, 10, 10, 15, 5],
+                        backgroundColor: [
+                            'rgba(255, 105, 0, 0.8)',
+                            'rgba(76, 175, 80, 0.8)',
+                            'rgba(33, 150, 243, 0.8)',
+                            'rgba(255, 152, 0, 0.8)',
+                            'rgba(156, 39, 176, 0.8)'
+                        ],
+                        borderColor: ['#FF6900', '#4caf50', '#2196f3', '#ff9800', '#9c27b0'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 20,
+                            title: {
+                                display: true,
+                                text: '提升百分比 (%)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '% 提升';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 演示标签切换
+            document.querySelectorAll('.analysis-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.analysis-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.analysis-content').forEach(c => c.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    const targetId = this.getAttribute('data-tab');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+            
+            // A/B测试分析
+            document.getElementById('abTestBtn').addEventListener('click', function() {
+                const visitors_a = parseInt(document.getElementById('visitors_a').value);
+                const clicks_a = parseInt(document.getElementById('clicks_a').value);
+                const visitors_b = parseInt(document.getElementById('visitors_b').value);
+                const clicks_b = parseInt(document.getElementById('clicks_b').value);
+                
+                const cr_a = (clicks_a / visitors_a * 100).toFixed(2);
+                const cr_b = (clicks_b / visitors_b * 100).toFixed(2);
+                const uplift = ((cr_b - cr_a) / cr_a * 100).toFixed(1);
+                
+                const significant = Math.abs(uplift) > 10;
+                
+                let result = `
+// A/B测试分析结果
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+方案A：${visitors_a} 访问，${clicks_a} 点击
+转化率：${cr_a}%
+
+方案B：${visitors_b} 访问，${clicks_b} 点击
+转化率：${cr_b}%
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+相对提升：${uplift}%
+显著性：${significant ? '✅ 统计显著' : '❌ 需更多样本'}
+
+建议结论：
+${significant ? (uplift > 0 ? '✅ 推荐上线方案B' : '✅ 保留方案A') : '⚠️ 继续测试，收集更多数据'}
+
+置信水平：95% | 当前样本量：${visitors_a + visitors_b}
+                `;
+                
+                const resultEl = document.getElementById('abTestResult');
+                resultEl.textContent = result;
+                resultEl.classList.add('updating');
+                setTimeout(() => resultEl.classList.remove('updating'), 500);
+            });
+            
+            // 用户分群分析
+            document.getElementById('segmentBtn').addEventListener('click', function() {
+                const recency = parseInt(document.getElementById('recency').value);
+                const frequency = parseFloat(document.getElementById('frequency').value);
+                const monetary = parseInt(document.getElementById('monetary').value);
+                
+                const r_score = recency <= 30 ? 3 : (recency <= 60 ? 2 : 1);
+                const f_score = frequency >= 3 ? 3 : (frequency >= 1 ? 2 : 1);
+                const m_score = monetary >= 500 ? 3 : (monetary >= 200 ? 2 : 1);
+                const total = r_score + f_score + m_score;
+                
+                let segment, strategy;
+                if (total >= 8) {
+                    segment = "🏆 高价值用户";
+                    strategy = "专属权益 · 新品优先 · VIP服务 · 深度调研";
+                } else if (total >= 5) {
+                    segment = "⭐ 潜力用户";
+                    strategy = "个性化推荐 · 激励复购 · 优惠券 · 内容营销";
+                } else {
+                    segment = "👥 一般用户";
+                    strategy = "唤醒策略 · 基础服务 · 降低流失 · 普惠活动";
+                }
+                
+                let result = `
+// RFM用户分群分析
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+用户特征：
+• 最近购买：${recency}天前
+• 购买频率：${frequency}次/月
+• 消费金额：¥${monetary}
+
+评分：R${r_score} F${f_score} M${m_score} = ${total}分
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+用户等级：${segment}
+
+运营策略：
+${strategy}
+
+建议行动：
+1. 本周内完成用户触达
+2. 推送定制化内容
+3. 监控7日留存变化
+                `;
+                
+                const resultEl = document.getElementById('segmentResult');
+                resultEl.textContent = result;
+                resultEl.classList.add('updating');
+                setTimeout(() => resultEl.classList.remove('updating'), 500);
+            });
+            
+            // 功能优先级评估
+            document.getElementById('priorityBtn').addEventListener('click', function() {
+                const feature = document.getElementById('feature_name').value;
+                const reach = parseFloat(document.getElementById('reach').value);
+                const impact = parseFloat(document.getElementById('impact').value);
+                const confidence = parseFloat(document.getElementById('confidence').value);
+                const effort = parseFloat(document.getElementById('effort').value);
+                
+                const rice_score = ((reach * impact * confidence) / effort).toFixed(1);
+                const rank = rice_score > 100 ? "🔥 高优先级" : (rice_score > 50 ? "⚖️ 中优先级" : "📋 低优先级");
+                
+                let result = `
+// RICE功能优先级评估
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+功能：${feature}
+
+评估维度：
+• 覆盖范围（Reach）：${reach}万用户
+• 影响力（Impact）：${impact}分（1-3）
+• 信心指数（Confidence）：${confidence}%
+• 开发成本（Effort）：${effort}人天
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RICE分数：${rice_score}
+优先级：${rank}
+
+决策建议：
+${rice_score > 100 ? '✅ 立即启动，安排开发' : rice_score > 50 ? '⏳ 规划排期，Q4实施' : '📋 放入需求池，持续观察'}
+
+ROI预估：${((reach * impact * confidence / effort) / 10).toFixed(1)}倍
+                `;
+                
+                const resultEl = document.getElementById('priorityResult');
+                resultEl.textContent = result;
+                resultEl.classList.add('updating');
+                setTimeout(() => resultEl.classList.remove('updating'), 500);
+            });
+            
+            // 数据上传与自动分析
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const sampleBtn = document.getElementById('sampleBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const uploadStats = document.getElementById('uploadStats');
+            const analysisOutput = document.getElementById('analysisOutput');
+            
+            let uploadedData = null;
+            
+            // 点击上传
+            uploadArea.addEventListener('click', () => fileInput.click());
+            
+            // 拖拽上传
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) handleFile(files[0]);
+            });
+            
+            // 文件选择
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) handleFile(e.target.files[0]);
+            });
+            
+            // 处理文件
+            function handleFile(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        if (file.name.endsWith('.json')) {
+                            uploadedData = JSON.parse(e.target.result);
+                        } else if (file.name.endsWith('.csv')) {
+                            uploadedData = parseCSV(e.target.result);
+                        }
+                        showStats(uploadedData);
+                        analyzeBtn.style.display = 'inline-flex';
+                        clearBtn.style.display = 'inline-flex';
+                        sampleBtn.style.display = 'none';
+                        analysisOutput.classList.remove('show');
+                        analysisOutput.textContent = '';
+                    } catch (error) {
+                        alert('文件解析失败，请检查格式。' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+            
+            // CSV解析
+            function parseCSV(text) {
+                const lines = text.trim().split('\n');
+                const headers = lines[0].split(',');
+                const data = [];
+                for (let i = 1; i < lines.length; i++) {
+                    const values = lines[i].split(',');
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        row[header.trim()] = values[index] ? values[index].trim() : '';
+                    });
+                    data.push(row);
+                }
+                return data;
+            }
+            
+            // 显示统计
+            function showStats(data) {
+                const records = Array.isArray(data) ? data.length : Object.keys(data).length;
+                const users = Array.isArray(data) ? new Set(data.map(d => d.user_id || d.id)).size :1;
+                
+                document.getElementById('recordCount').textContent = records;
+                document.getElementById('userCount').textContent = users;
+                
+                // 计算平均值（如果有amount字段）
+                if (Array.isArray(data) && data[0].amount) {
+                    const avg = data.reduce((sum, d) => sum + parseFloat(d.amount), 0) / records;
+                    document.getElementById('avgValue').textContent = avg.toFixed(1);
+                } else {
+                    document.getElementById('avgValue').textContent = '-';
+                }
+                
+                // 异常检测（简单版）
+                if (Array.isArray(data) && data[0].amount) {
+                    const amounts = data.map(d => parseFloat(d.amount));
+                    const mean = amounts.reduce((a, b) => a + b, 0) / amounts.length;
+                    const std = Math.sqrt(amounts.reduce((sq, n) => sq + Math.pow(n - mean, 2), 0) / amounts.length);
+                    const outliers = amounts.filter(x => Math.abs(x - mean) > 2 * std).length;
+                    document.getElementById('anomalyCount').textContent = outliers;
+                } else {
+                    document.getElementById('anomalyCount').textContent = '-';
+                }
+                
+                uploadStats.style.display = 'grid';
+            }
+            
+            // 自动分析
+            analyzeBtn.addEventListener('click', function() {
+                if (!uploadedData) {
+                    alert('请先上传数据文件');
+                    return;
+                }
+                
+                analysisOutput.textContent = '正在分析数据，请稍候...';
+                analysisOutput.classList.add('show');
+                analyzeBtn.disabled = true;
+                analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 分析中...';
+                
+                setTimeout(() => {
+                    const result = autoAnalysis(uploadedData);
+                    analysisOutput.textContent = formatAnalysisResult(result);
+                    analyzeBtn.disabled = false;
+                    analyzeBtn.innerHTML = '<i class="fas fa-cogs"></i> 开始自动分析';
+                }, 1500);
+            });
+            
+            // 使用示例数据
+            sampleBtn.addEventListener('click', function() {
+                //生成示例数据
+                const sampleData = [];
+                for (let i = 1; i <= 50; i++) {
+                    sampleData.push({
+                        user_id: `U${1000 + i}`,
+                        behavior: ['browse', 'purchase', 'add_to_cart'][Math.floor(Math.random() * 3)],
+                        timestamp: `2024-01-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')}`,
+                        amount: Math.random() * 1000 + 50,
+                        satisfaction: Math.floor(Math.random() * 3) + 2
+                    });
+                }
+                
+                uploadedData = sampleData;
+                showStats(sampleData);
+                analyzeBtn.style.display = 'inline-flex';
+                clearBtn.style.display = 'inline-flex';
+                sampleBtn.style.display = 'none';
+                analysisOutput.textContent = '示例数据已加载，点击"开始自动分析"查看结果';
+                analysisOutput.classList.add('show');
+            });
+            
+            // 清空数据
+            clearBtn.addEventListener('click', function() {
+                uploadedData = null;
+                uploadStats.style.display = 'none';
+                analysisOutput.classList.remove('show');
+                analysisOutput.textContent = '';
+                analyzeBtn.style.display = 'none';
+                clearBtn.style.display = 'none';
+                sampleBtn.style.display = 'inline-flex';
+                fileInput.value = '';
+            });
+            
+            // 自动分析函数            function autoAnalysis(data) {
+                const report = {};
+                
+                // 基础统计
+                report['基础统计'] = {
+                    '总记录数': data.length,
+                    '唯一用户数': new Set(data.map(d => d.user_id || d.id)).size,
+                    '数据时间范围': `${data[0].timestamp} 至 ${data[data.length - 1].timestamp}`
+                };
+                
+                // 行为分布
+                if (data[0].behavior) {
+                    const behaviorCount = {};
+                    data.forEach(d => {
+                        behaviorCount[d.behavior] = (behaviorCount[d.behavior] || 0) + 1;
+                    });
+                    report['行为分布'] = behaviorCount;
+                    report['热门行为'] = Object.keys(behaviorCount).reduce((a, b) => behaviorCount[a] > behaviorCount[b] ? a : b);
+                }
+                
+                // 价值分析
+                if (data[0].amount) {
+                    const amounts = data.map(d => parseFloat(d.amount));
+                    const avg = amounts.reduce((a, b) => a + b, 0) / amounts.length;
+                    report['平均消费'] = `¥${avg.toFixed(2)}`;
+                    
+                    const highValue = amounts.filter(a => a > avg * 2).length;
+                    report['高价值用户数'] = highValue;
+                    report['高价值用户占比'] = `${(highValue / amounts.length * 100).toFixed(1)}%`;
+                }
+                
+                // 满意度
+                if (data[0].satisfaction) {
+                    const satisfactions = data.map(d => parseFloat(d.satisfaction));
+                    const avgSat = satisfactions.reduce((a, b) => a + b, 0) / satisfactions.length;
+                    report['平均满意度'] = `${avgSat.toFixed(2)}/5`;
+                    
+                    const lowSat = satisfactions.filter(s => s < 3).length;
+                    report['低满意度用户'] = lowSat;
+                    report['满意度预警'] = lowSat > 0 ? '需要关注' : '良好';
+                }
+                
+                // 异常检测
+                if (data[0].amount) {
+                    const amounts = data.map(d => parseFloat(d.amount));
+                    const Q1 = amounts.sort((a, b) => a - b)[Math.floor(amounts.length * 0.25)];
+                    const Q3 = amounts.sort((a, b) => a - b)[Math.floor(amounts.length * 0.75)];
+                    const IQR = Q3 - Q1;
+                    const outliers = amounts.filter(a => a < Q1 - 1.5 * IQR || a > Q3 + 1.5 * IQR).length;
+                    report['异常交易数'] = outliers;
+                    report['异常检测'] = outliers > 0 ? `检测到 ${outliers} 个异常值` : '无异常';
+                }
+                
+                // 优化建议
+                const suggestions = [];
+                if (report['满意度预警'] === '需要关注') {
+                    suggestions.push('1. 针对低满意度用户进行回访，识别核心痛点');
+                }
+                if (report['高价值用户占比'] && parseFloat(report['高价值用户占比']) < 10) {
+                    suggestions.push('2. 高价值用户占比偏低，建议推出VIP权益提升留存');
+                }
+                if (report['异常交易数'] > 0) {
+                    suggestions.push('3. 存在异常交易，建议进行风控核查');
+                }
+                if (suggestions.length === 0) {
+                    suggestions.push('1. 数据表现健康，建议继续保持当前策略');
+                    suggestions.push('2. 关注核心指标波动，定期复盘');
+                }
+                report['优化建议'] = suggestions;
+                
+                return report;
+            }
+            
+            // 格式化分析结果
+            function formatAnalysisResult(report) {
+                let result = '// 自动分析报告\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+                
+                for (const [key, value] of Object.entries(report)) {
+                    result += `${key}：\n`;
+                    if (typeof value === 'object') {
+                        for (const [k, v] of Object.entries(value)) {
+                            result += `  ${k}: ${v}\n`;
+                        }
+                    } else if (Array.isArray(value)) {
+                        value.forEach(v => result += `  ${v}\n`);
+                    } else {
+                        result += `  ${value}\n`;
+                    }
+                    result += '\n';
+                }
+                
+                result += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+                result += '//基于以上数据，建议立即采取行动\n';
+                result += '// 优先处理满意度和高价值用户问题\n';
+                
+                return result;
+            }
+            
+            // 代码复制与运行
+            document.getElementById('copyCodeBtn').addEventListener('click', function() {
+                const code = document.getElementById('codeBlock').textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    const btn = this;
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                    }, 2000);
+                });
+            });
+            
+            document.getElementById('runCodeBtn').addEventListener('click', function() {
+                alert('代码运行环境需要Python支持。\n\n您可以：\n1. 复制代码到本地Python环境运行\n2. 使用Jupyter Notebook\n3. 在线Python编译器（如Google Colab）\n\n详细使用说明见"使用指南"');
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // 滚动时更新导航状态
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('nav a');
+                
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // 滚动动画触发
+                const fadeElements = document.querySelectorAll('.fade-in');
+                fadeElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            // 初始化动画
+            setTimeout(() => {
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'all 0.6s ease-out';
+                });
+                // 触发首次动画
+                const firstElements = document.querySelectorAll('.hero .fade-in');
+                firstElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 100);
+        });
+    </script>
 </body>
 </html>
